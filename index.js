@@ -8,24 +8,13 @@ define(function(require) {
     * @author Haris Skiadas <skiadas@hanover.edu>
     * Barb Wahl <wahl@hanover.edu>
     */
-   var Main, loader, key;
-
-   /**
-    * TODO: Make simpleLoader more "careful"
-    */
-
-   loader = require('./simpleLoader');
+   var Main, loader;
 
    Main = {};
 
-   Object.defineProperty(Main, '_modules', { value: {} });
-   for (key in loader) {
-      if (loader.hasOwnProperty(key)) {
-         Object.defineProperty(Main, key, { value: loader[key] });
-      }
-   }
+   loader = new (require('panthrLoader'))(Main);
 
-   Main.loadModule(require('panthrBase'));
+   loader.loadModule(require('panthrbase'));
 
    return Main;
 
